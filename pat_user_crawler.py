@@ -56,7 +56,7 @@ def get_user(url):
 if __name__=="__main__":
     num = 293  # 当前PAT甲级排名的页数
     for i in range(1,num+1):
-        url = url_base + str(i)
+        url = url_base + str(i)  # 拼接成排名列表的每一页的地址
         get_user(url)
         print(r"alredy done:{} of {}".format(i,num))
         
