@@ -1,3 +1,7 @@
+'''
+Author:LiuJian
+Date:2017-06-01
+'''
 import requests
 from bs4 import BeautifulSoup
 import bs4
