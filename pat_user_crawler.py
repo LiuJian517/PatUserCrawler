@@ -4,7 +4,7 @@ Date:2017-06-01
 
 技术路线：
 1.根据PAT排名页面下载所有用户排名列表（但排名列表显示的为昵称）
-2.通过每条数据的链接，进入个人主页
+2.通过每条数据的当中链接，进入个人主页
 3.获取用户名
 '''
 import requests
@@ -16,7 +16,6 @@ def get(url):
     根据页面URL下载内容
     '''
     try:
-        # r = requests.get("http://www.baidu.com")
         r = requests.get(url)
         r.raise_for_status()
         r.encoding = r.apparent_encoding
@@ -27,16 +26,18 @@ def get(url):
 
 # PAT排名页面地址
 url_base = "https://www.patest.cn/contests/pat-a-practise/ranklist?page="
+
 # PAT用户主页地址前缀
 user_url_base = "https://www.patest.cn"
+
+# 保存获取到的用户名
 user = []
 
 def get_user(url):
     html = get(url)
     soup = BeautifulSoup(html,'html.parser')
     # print(soup.prettify())
-
-    # urls = []
+    
     table = soup.find('tbody')
     for tr in table.children:
         if isinstance(tr,bs4.element.Tag):
@@ -55,9 +56,10 @@ def get_user(url):
 if __name__=="__main__":
     num = 293  # 当前PAT甲级排名的页数
     for i in range(1,num+1):
-        url = url_base + str(i)
+        url = url_base + str(i)  # 拼接成排名列表的每一页的地址
         get_user(url)
         print(r"alredy done:{} of {}".format(i,num))
+        
     # print(user)
     
     # 将所有用户名存入文件
